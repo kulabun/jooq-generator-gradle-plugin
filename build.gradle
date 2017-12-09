@@ -1,0 +1,46 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.4.0'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'maven'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'java-gradle-plugin'
+apply plugin: 'maven-publish'
+
+group 'org.labun.jooq.codegen'
+version '1.0'
+
+gradlePlugin {
+    plugins {
+        codegen {
+            id = "org.labun.jooq.codegen"
+            implementationClass = "org.labun.jooq.codegenng.gradle.JooqCodeGenerationPlugin"
+        }
+    }
+}
+
+publishing {
+    repositories {
+        mavenLocal()
+    }
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile 'org.labun.jooq.codegen:generator:1.0'
+}
