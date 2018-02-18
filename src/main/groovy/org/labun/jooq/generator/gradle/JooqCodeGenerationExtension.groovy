@@ -1,6 +1,6 @@
-package org.labun.jooq.codegenng.gradle
+package org.labun.jooq.generator.gradle
 
-import org.labun.jooq.codegen.config.NameConfig
+import org.labun.jooq.generator.config.NameConfig
 
 /**
  * @author Konstantin Labun

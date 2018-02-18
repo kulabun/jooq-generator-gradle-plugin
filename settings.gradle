@@ -15,4 +15,4 @@ include 'api'
 include 'services:webservice'
 */
 
-rootProject.name = 'gradle-plugin'
+rootProject.name = 'code-generator-gradle-plugin'
