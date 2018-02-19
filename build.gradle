@@ -6,6 +6,7 @@ buildscript {
     }
     dependencies {
         classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.4.0'
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.10"
     }
 }
 
@@ -15,22 +16,29 @@ apply plugin: 'maven'
 apply plugin: 'com.jfrog.artifactory'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'maven-publish'
+apply plugin: 'com.gradle.plugin-publish'
 
 group 'org.labun.jooq'
 version '1.0'
 
-gradlePlugin {
-    plugins {
-        jooqGenerator {
-            id = "org.labun.jooq.codegenerator"
-            implementationClass = "org.labun.jooq.generator.gradle.JooqCodeGenerationPlugin"
-        }
-    }
-}
-
 publishing {
     repositories {
         mavenLocal()
+    }
+}
+
+pluginBundle {
+    website = 'https://labun.me'
+    vcsUrl = 'https://github.com/LabunORG/jooq-generator-gradle-plugin'
+
+    plugins {
+        jooqGenerator {
+            id = "org.labun.jooq.codegenerator"
+            displayName = 'LabunORG JOOQ Code Generator'
+            description = 'Highly customizable JOOQ code generator'
+            tags = ['jooq', 'code-generator']
+            version = '1.0'
+        }
     }
 }
 
