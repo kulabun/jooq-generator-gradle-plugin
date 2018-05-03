@@ -19,7 +19,7 @@ apply plugin: 'maven-publish'
 apply plugin: 'com.gradle.plugin-publish'
 
 group 'org.labun.jooq'
-version '1.0'
+version '2.0-SNAPSHOT'
 
 publishing {
     repositories {
@@ -36,8 +36,8 @@ pluginBundle {
             id = "org.labun.jooq.codegenerator"
             displayName = 'LabunORG JOOQ Code Generator'
             description = 'Highly customizable JOOQ code generator'
-            tags = ['jooq', 'code-generator']
-            version = '1.0'
+            tags = ['jooq', 'code-generator', 'java8', 'sql', 'repository', 'database']
+            version = project.version
         }
     }
 }
@@ -50,5 +50,13 @@ repositories {
 dependencies {
     compile gradleApi()
     compile localGroovy()
-    compile 'org.labun.jooq:code-generator:1.0'
+    compile 'org.labun.jooq:code-generator:2.0-SNAPSHOT'
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: uri('../local-repo'))
+        }
+    }
 }
