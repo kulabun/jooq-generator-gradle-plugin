@@ -25,28 +25,27 @@ class JooqCodeGenerationPlugin implements Plugin<Project> {
             doLast {
                 configuration.database.with(extension.database)
 
-                List<SubGeneratorConfig> defaultConfigs = new Defaults.CodeGenerationConfigs().all()
+                List<SubGeneratorConfig> defaultGenerators = new Defaults.CodeGenerationConfigs().all()
 
                 def sourceRootConfigurer = {
                     it.generatedSourcesRoot = "${project.getBuildDir()}/generated/src/main/java/"
                 }
 
-                def subGenerators = new ArrayList<>(configuration.subGenerators)
+                def subGenerators = new ArrayList<>(defaultGenerators)
                 extension.generators.each({ cfg ->
                     def generator = new SubGeneratorConfig()
                     generator.with(sourceRootConfigurer)
                     generator.with(cfg)
 
-                    def defaultGenerator = defaultConfigs.find({
+                    def defaultGenerator = defaultGenerators.find({
                         it.generatorName == generator.generatorName
                     })
                     if (defaultGenerator != null) {
-                        generator = defaultGenerator
-                        generator.with(sourceRootConfigurer)
-                        generator.with(cfg)
+                        defaultGenerator.with(sourceRootConfigurer)
+                        defaultGenerator.with(cfg)
+                    } else {
+                        subGenerators.add(generator)
                     }
-
-                     subGenerators.add(generator)
                 })
 
                 configuration.subGenerators = subGenerators
