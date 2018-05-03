@@ -45,3 +45,5 @@ jooqCodeGeneration {
     ]
 }
 ```
+
+Look an example project for more information: https://github.com/LabunORG/jooq-generator-gradle-plugin-samples
