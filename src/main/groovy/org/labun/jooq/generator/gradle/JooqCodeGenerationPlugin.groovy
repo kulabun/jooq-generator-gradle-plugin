@@ -25,7 +25,7 @@ class JooqCodeGenerationPlugin implements Plugin<Project> {
             doLast {
                 configuration.database.with(extension.database)
 
-                List<SubGeneratorConfig> defaultGenerators = new Defaults.CodeGenerationConfigs().all()
+                List<SubGeneratorConfig> defaultGenerators = Defaults.CodeGenerationConfigs.all()
 
                 def sourceRootConfigurer = {
                     it.generatedSourcesRoot = "${project.getBuildDir()}/generated/src/main/java/"
@@ -49,7 +49,7 @@ class JooqCodeGenerationPlugin implements Plugin<Project> {
                 })
 
                 configuration.subGenerators = subGenerators
-                new GenerationTool().generate(new DefaultGenerator(configuration))
+                GenerationTool.generate(new DefaultGenerator(configuration))
             }
         }
     }
