@@ -31,7 +31,7 @@ class JooqCodeGenerationPlugin implements Plugin<Project> {
                     it.generatedSourcesRoot = "${project.getBuildDir()}/generated/src/main/java/"
                 }
 
-                def subGenerators = new ArrayList<>(defaultGenerators)
+                def subGenerators = new ArrayList<>(Defaults.CodeGenerationConfigs.base())
                 extension.generators.each({ cfg ->
                     def generator = new SubGeneratorConfig()
                     generator.with(sourceRootConfigurer)
